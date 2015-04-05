@@ -60,7 +60,7 @@ router.get ('/:from/:to', function(req, res) {
 					DESTINATION.photo = json[i].Value
 				}
 				if (json[i].Property === 'dbpprop:imageFlag') {
-					DESTINATION.flag_photo = 'http://en.wikipedia.org/wiki/' + DESTINATION.city.replace(' ', '_') + '##/media/File:' json[i].Value.replace(' ', '_')
+					DESTINATION.flag_photo = 'http://en.wikipedia.org/wiki/' + DESTINATION.city.replace(' ', '_') + '#/media/File:' + json[i].Value.replace(' ', '_')
 				}
 				if (json[i].Property === 'dbpprop:postalCode') {
 					DESTINATION.postal_code = json[i].Value
