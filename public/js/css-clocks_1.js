@@ -174,6 +174,18 @@ var oClockDigital = {
     }
 };
 
+var bScriptLoaded = false;
+var bDOMLoaded = false;
+var bClocksInitialised = false;
+
+function ClockInit() {
+    if ((bClocksInitialised != true) && (bDOMLoaded == true) && (bScriptLoaded == true)) {
+        bClocksInitialised = true;
+        oClockAnalog.fInit();
+        oClockDigital.fInit();
+    }
+}
+
 $(document).ready(function() {
     ClockInit();
 });

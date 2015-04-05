@@ -29,6 +29,10 @@ iframe {
 	border: none !important;
 }
 
+#flights {
+	height: 480px;
+}
+
 .tile
 {
 	text-align: center;

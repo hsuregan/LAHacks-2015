@@ -49,6 +49,10 @@ a {
 	margin 0;
 }
 
+ui-autocomplete {
+	color: #006400 !important; 
+}
+
 #dest {
 	color: #006400 !important;
 }

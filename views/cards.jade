@@ -120,11 +120,6 @@ html.no-js(lang='en')
         li
           #Abstract.tile(style='padding: 10px; font-size: 15px !important;')
             .tile_title Abstract
-        li
-          #clockdigital
-            img#digitalhour(src='../../images/digitalhours.gif', alt='Clocks hours')
-            img#digitalminute(src='../../images/digitalminutes.gif', alt='Clocks minutes')
-            img#digitalsecond(src='../../images/digitalseconds.gif', alt='Clocks seconds')
   script(src='../../js/masonry.pkgd.min.js')
   script(src='../../js/imagesloaded.js')
   script(src='../../js/classie.js')
@@ -286,16 +281,22 @@ html.no-js(lang='en')
             flights[i] = {
               distance: $(this).attr("Distance") + " KM",
               duration: $(this).attr("Duration"),
-              flight_numbers: $(this).attr("FlightNumbers.3"),
+              flight_numbers: $(this).attr("FlightNumbers.3").split('/')[0],
               flight_time: $(this).attr("FlightTime"),
             }
+            var content = (i==0) ? "" : "<hr >";
+            content = content + "<div class='row'><div class='col-md-6'><center><strong><u>Flight Numbers</u></strong><br />" + flights[i].flight_numbers + "</center>" +"<div><strong><u>Distance</u></strong><br /> " + flights[i].distance + "</div></div>" +"<div class='col-md-6'>" +"<div><strong><u>Trip Duration</u></strong> " + flights[i].duration + "</div>" +"<div><strong><u>Flight Duration</u></strong> " + flights[i].flight_time + "</div></div></div>";
+            $('#flights').append(content);
+            console.log(content);
+            console.log(flights[i]);
             i++;
           });
           console.log(dest);
           get_high_low(dest["city"], dest["country"]);
 
           if(dest.timezone) {
-            $('#time_zone').append("Time Zone: &nbsp;" + dest.timezone);
+            timeZ = dest.timezone.replace(/_/g, " ");
+            $('#time_zone').append("Time Zone: &nbsp;" + timeZ);
           }
 
           if (dest.population_total) {
@@ -338,6 +339,8 @@ html.no-js(lang='en')
             citycompress = dest.city.replace(' ', '_');
             $('#Abstract').append(dest.abstract + " <a color='white' href = 'http://en.wikipedia.org/wiki/" +citycompress+ "'> Read more </a>");
           }
+
+
 
           $('#details').css('padding-bottom', '25px');
           $('#details').css('background-color', 'blue');
