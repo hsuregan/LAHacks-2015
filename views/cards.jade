@@ -4,7 +4,7 @@ html.no-js(lang='en')
     meta(charset='UTF-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    title Cards
+    title Loading Effects for Grid Items | Demo 1
     meta(name='description', content='Loading Effects for Grid Items with CSS Animations')
     meta(name='keywords', content='css animation, loading effect, google plus, grid items, masonry')
     meta(name='author', content='Codrops')
@@ -13,9 +13,41 @@ html.no-js(lang='en')
     link(rel='stylesheet', type='text/css', href='../../css/component.css')
     script(src='../../js/modernizr.custom.js')
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
-    script(src='script.js')
+    script(src='../../js/script.js')
+    script(src='../../js/skycons.js')
     // geobytes
     script(src='http://gd.geobytes.com/geoif', language='javascript')
+    style.
+      @import url(http://fonts.googleapis.com/css?family=Quicksand:300,400,700);
+    link(href='http://fonts.googleapis.com/css?family=Quicksand:300,400,700', rel='stylesheet', type='text/css')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js', type='text/javascript')
+    link(rel='stylesheet', href='http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/flick/jquery-ui.css')
+    script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+    style.
+      * {
+      font-family: 'Quicksand', sans-serif;
+      color: white;
+      }
+      .weather_date {
+      font-size: 2vw;
+      }
+      #back {
+      margin-left: 10px;
+      text-decoration: none;
+      color: blue;
+      font-style: bold;
+      }
+      #website_link {
+      text-decoration: none !important;
+      color: white !important;
+      }
+    // bootstrap
+    // Latest compiled and minified CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css')
+    // Optional theme
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css')
+    // Latest compiled and minified JavaScript
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js')
   body
     .container
       br
@@ -23,60 +55,271 @@ html.no-js(lang='en')
       #destination DESTINATION
       ul#grid.grid.effect-1
         li
-          #currency.tile
+          #currency.tile(style='height: 200px !important; font-size: 1.3em')
+            br
             .tile_title Currency
         li
           #flights.tile
+            br
             .tile_title Flights
         li
-          #weather.tile
+          #weather.tile(style='padding-left: 20px; padding-right: 20px; height: 100%;')
+            br
             .tile_title Weather
+            #forcast
+              .row
+                .col-md-4
+                  canvas#icon1(width='100', height='100')
+                .col-md-8
+                  #weather_date1.weather_date
+              hr
+              .row
+                .col-md-4
+                  canvas#icon2(width='100', height='100')
+                .col-md-8
+                  #weather_date2.weather_date
+              hr
+              .row
+                .col-md-4
+                  canvas#icon3(width='100', height='100')
+                .col-md-8
+                  #weather_date3.weather_date
+              hr
+              .row
+                .col-md-4
+                  canvas#icon4(width='100', height='100')
+                .col-md-8
+                  #weather_date4.weather_date
+              hr
+              .row
+                .col-md-4
+                  canvas#icon5(width='100', height='100')
+                .col-md-8
+                  #weather_date5.weather_date
+              hr
+              .row(style='padding-bottom: 10px')
+                .col-md-4
+                  canvas#icon6(width='100', height='100')
+                .col-md-8
+                  #weather_date6.weather_date
         li
-          #wiki.tile
-            .tile_title Wiki
+          #details.tile(style='height: 730px; overflow: scroll')
+            .tile_title Details
+            center
+              #website.tile_title(style='font-size: 20px !important; text-align: center')
+            br
+            #time_zone.tile_title(style='font-size: 20px !important; text-align: left')
+            #population.tile_title(style='font-size: 20px !important; text-align: left')
+            #pop_density.tile_title(style='font-size: 20px !important; text-align: left')
+            #elevation.tile_title(style='font-size: 20px !important; text-align: left')
+            #postal_code.tile_title(style='font-size: 20px !important; text-align: left')
+            #dlatitude.tile_title(style='font-size: 20px !important; text-align: left')
+            #dlongitude.tile_title(style='font-size: 20px !important; text-align: left')
         li
-          #city.tile
-            .tile_title Major City 1
-        li
-          #city.tile
-            .tile_title Major City 2
-        li
-          #city.tile
-            .tile_title Major City 3
-  script.
-    $(document).ready(function() {
-    $("#template").load("template.html");
-    });
+          #Abstract.tile(style='padding: 10px; font-size: 15px !important;')
+            .tile_title Abstract
   script(src='../../js/masonry.pkgd.min.js')
   script(src='../../js/imagesloaded.js')
   script(src='../../js/classie.js')
   script(src='../../js/AnimOnScroll.js')
   script.
     new AnimOnScroll( document.getElementById( 'grid' ), {
-    minDuration : 0.4,
-    maxDuration : 0.7,
-    viewportFactor : 0.2
-    } );
+      minDuration : 0.4,
+      maxDuration : 0.7,
+      viewportFactor : 0.2
+    });
   script(type='text/javascript').
     $(document).ready( function(){
       var from = !{JSON.stringify(from)};
       var to = !{JSON.stringify(to)};
       var dest = to;
       var origin = from;
+      function timeConverter(UNIX_timestamp){
+        var a = new Date(UNIX_timestamp*1000);
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var hour = a.getHours();
+        var min = a.getMinutes();
+        var sec = a.getSeconds();
+        return date;
+      }
+      function b(latitude, longitude){
+        var apiKey = '706c386921e262c76e7f8801b02e8c85';
+        var url = 'https://api.forecast.io/forecast/';
+        var lati = latitude;
+        var longi = longitude;
+        var x = [];
+        $.getJSON(url + apiKey + "/" + lati + "," + longi + "?callback=?", function(data) {
+          var high = [];
+          var low = [];
+          for(i = 0; i < 6; i++) {
+            x.push(data.daily.data[i].icon);
+            high.push(data.daily.data[i].temperatureMax);
+            low.push(data.daily.data[i].temperatureMin)
+          }
+            get_next_7_day_forcast(x, high, low);
+        });
+        return x;
+      }
+      function get_high_low(city, country) {
+        var url = "https://maps.googleapis.com/maps/api/geocode/json?address=+" + city + ",+" + country + "&key=AIzaSyBT6-6KYw_7sfruJivjSAMfVH699u-8ql8";
+        var icons;
+        $.getJSON(url, function (json) {
+          var latitude = json.results[0].geometry.location.lat;
+          var longitude = json.results[0].geometry.location.lng;
+          icons = b(latitude, longitude);
+        });
+        return icons;
+      }
+
+      function get_next_7_day_forcast(arr, high, low) {
+        var today = new Date();
+        var day = today.getDate();
+        var month = today.getMonth() + 1;
+        var skycons = new Skycons({"color": "white"});
+
+        for(i = 0; i < arr.length; i ++) {
+          day = day + i;
+          var num = i + 1;
+          var icon = "icon" + num;
+
+          switch(arr[i]) {
+            case "clear-day":
+              skycons.add(icon, Skycons.CLEAR_DAY);
+              document.getElementById("weather_date" + num).innerHTML = "<center>" + month + "/" + day + ": clear <br />H: " + high[i] + "F<br />L: " + low[i] +  "F</center>";
+              break;
+            case "partly-cloudy-day":
+              skycons.add(icon, Skycons.PARTLY_CLOUDY_DAY);
+              document.getElementById("weather_date" + num).innerHTML ="<center>" + month + "/" + day + ": partly cloudy<br />H: " + high[i] + "F<br />L: " + low[i] +  "F</center>";
+              break;
+            case "partly-cloudy-night":
+              skycons.add(icon, Skycons.PARTLY_CLOUDY_NIGHT);
+              document.getElementById("weather_date" + num).innerHTML ="<center>" + month + "/" + day + ": partly cloudy night<br />H: " + high[i] + "F<br />L: " + low[i] +  "F</center>";
+              break;
+            case "cloudy":
+              skycons.add(icon, Skycons.CLOUDY);
+              document.getElementById("weather_date" + num).innerHTML ="<center>" + month + "/" + day + ": cloudy<br />H: " + high[i] + "F<br />L: " + low[i] +  "F</center>";
+              break;
+            case "rain":
+              skycons.add(icon, Skycons.RAIN);
+              document.getElementById("weather_date" + num).innerHTML ="<center>" + month + "/" + day + ": rainy<br />H: " + high[i] +  "F<br />L: " + low[i] + "F</center>";
+              break;
+            case "sleet":
+              skycons.add(icon, Skycons.SLEET);
+              document.getElementById("weather_date" + num).innerHTML ="<center>" + month + "/" + day + ": sleet<br />H: " + high[i] + "F<br />L: " + low[i] +  "F</center>";
+              break;
+            case "snow":
+              skycons.add(icon, Skycons.SNOW);
+              document.getElementById("weather_date" + num).innerHTML ="<center>" + month + "/" + day + ": snowy<br />H: " + high[i] +"F<br />L: " + low[i] +  "F</center>";
+              break;
+            case "wind":
+              skycons.add(icon, Skycons.WIND);
+              document.getElementById("weather_date" + num).innerHTML ="<center>" + month + "/" + day + ": windy<br />H: " + high[i] +"F<br />L: " + low[i] +   "F</center>";
+              break;
+            case "fog":
+              skycons.add(icon, Skycons.FOG);
+              document.getElementById("weather_date" + num).innerHTML ="<center>" + month + "/" + day + ": fog<br />H: " + high[i] + "F<br />L: " + low[i] +  "F</center>";
+              break;
+            }
+          }
+        skycons.play();
+      }
       document.getElementById("destination").innerHTML = origin.city + " &nbsp; &nbsp;  ✈  &nbsp; &nbsp; " + dest.city;
+      document.getElementById("destination").innerHTML = "<span style='color: #00FFFF'>" + origin.city + "</span>"+" &nbsp; <span style='color: #00CCFF'>  ✈ </span> &nbsp; <span style='color: #0099FF'>  ✈ </span> &nbsp; <span style='color: #0066ff'>  ✈ </span> &nbsp; " + dest.city;
       var toCurrency = dest.currency;
       var fromCurrency = origin.currency;
       $.ajax({
         url: "http://devel.farebookings.com/api/curconversor/"+fromCurrency+"/"+toCurrency+"/1/",
-        dataType: 'jsonp',
-        success: function (data) {
-          document.getElementById("currency").innerHTML = document.getElementById("currency").innerHTML + "<br /> 1 " + fromCurrency + " = " + data[toCurrency] + " " + toCurrency;
-        }   
+        dataType: 'jsonp'
+      }).done(function(data) {
+        document.getElementById("currency").innerHTML = document.getElementById("currency").innerHTML + "<br /> 1 " + fromCurrency + " = " + data[toCurrency] + " " + toCurrency;
       });
-      $('#currency').css("background-color", "yellow"); //another way 
-    })
+      URL1 = 'https://airport.api.aero/airport/nearest/' + dest.latitude + '/' + dest.longitude + '?maxAirports=3&user_key=93ab38ecf65cfd38926e50f0f113c8b6'
+      URL2 = 'https://airport.api.aero/airport/nearest/' + origin.latitude + '/' + origin.longitude + '?maxAirports=3&user_key=93ab38ecf65cfd38926e50f0f113c8b6'
+      $.ajax({
+        url: URL1,
+        dataType: 'jsonp'
+      }).done(function(data) {
+        dest.airportcode = data.airports[0].code;
 
+      });
+      $.ajax({
+        url: URL2,
+        dataType: 'jsonp'
+      }).done(function(data) {
+        origin.airportcode = data.airports[0].code;
+        $.ajax({
+          url: 'https://flightlookup-timetable-rest.p.mashape.com/TimeTable/' + origin.airportcode + '/' + dest.airportcode + '/05/04/2015/?Count=3',
+          headers: {
+            "X-Mashape-Key": "YjYRxTEIUpmshLFa4Omwy69Fq59Up1EBEqojsnJdPplx2Ddsx3",
+            "Accept": "text/plain" 
+          }
+        }).done(function(flightsdata) {
+          var flights = [];
+          var i = 0;
+          $(flightsdata).find("route").each(function() {
+            flights[i] = {
+              distance: $(this).attr("Distance") + " KM",
+              duration: $(this).attr("Duration"),
+              flight_numbers: $(this).attr("FlightNumbers.3"),
+              flight_time: $(this).attr("FlightTime"),
+            }
+            i++;
+          });
+          console.log(dest);
+          get_high_low(dest["city"], dest["country"]);
 
+          if(dest.timezone) {
+            $('#time_zone').append("Time Zone: &nbsp;" + dest.timezone);
+          }
+
+          if (dest.population_total) {
+            $('#population').append("Population: &nbsp;" + dest.population_total);
+          }
+
+          if (dest.population_density) {
+            $('#pop_density').append("Population Density: &nbsp;" + dest.population_density);
+          }
+
+          if (dest.elevation) {
+            $('#elevation').append("Elevation: &nbsp;" + dest.elevation);
+          }
+
+          if (dest.postal_code) {
+            $('#postal_code').append("Postal Code: &nbsp;" + dest.postal_code);
+          }
+
+          if (dest.latitude) {
+            $('#dlatitude').append("Latitude: &nbsp;" + dest.latitude);
+          }
+
+          if (dest.longitude) {
+            $('#dlongitude').append("Longitude: &nbsp;" + dest.longitude);
+          }
+
+          if (dest.website) {
+            $('#website').append('<a id="website_link" href="' + dest.website + '">' + dest.website + '<br />');
+          }
+
+          if (dest.flag_photo) {
+            $('#details').append('<br /><iframe src="' + dest.flag_photo + '"width="100%" height="450" margin="0" padding="0" border="none" overflow="hidden" scrolling="no"></iframe>');
+          }
+
+          if (!dest.flag_photo) {
+            $('#details').css('height', '380px');
+          }
+          
+          if(dest.abstract) {
+            $('#Abstract').append(dest.abstract);
+          }
+
+          $('#details').css('padding-bottom', '25px');
+          $('#details').css('background-color', 'blue');
+        });
+      });
+    });
 
 
 

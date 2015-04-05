@@ -1,0 +1,245 @@
+doctype html
+html.no-js(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Cards
+    meta(name='description', content='Loading Effects for Grid Items with CSS Animations')
+    meta(name='keywords', content='css animation, loading effect, google plus, grid items, masonry')
+    meta(name='author', content='Codrops')
+    link(rel='shortcut icon', href='../favicon.ico')
+    link(rel='stylesheet', type='text/css', href='../../css/default.css')
+    link(rel='stylesheet', type='text/css', href='../../css/component.css')
+    script(src='../../js/modernizr.custom.js')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
+    script(src='http://gd.geobytes.com/geoif', type='text/javascript')
+  body
+    .container
+      br
+      br
+      #destination DESTINATION
+      ul#grid.grid.effect-1
+        li
+          #currency.tile
+            .tile_title Currency
+        li
+          #flights.tile
+            .tile_title Flights
+        li
+          #weather.tile
+            .tile_title Weather
+        li
+          #wiki.tile
+            .tile_title Wiki
+        li
+          #city.tile
+            .tile_title Major City 1
+        li
+          #city.tile
+            .tile_title Major City 2
+        li
+          #city.tile
+            .tile_title Major City 3
+  script.
+    $(document).ready(function() {
+    $("#template").load("template.html");
+    });
+  script(src='../../js/masonry.pkgd.min.js')
+  script(src='../../js/imagesloaded.js')
+  script(src='../../js/classie.js')
+  script(src='../../js/xml2json.min.js' language='javascript')
+  script(src='../../js/AnimOnScroll.js')
+  script.
+    new AnimOnScroll( document.getElementById( 'grid' ), {
+    minDuration : 0.4,
+    maxDuration : 0.7,
+    viewportFactor : 0.2
+    } );
+  script(type='text/javascript').
+    $(document).ready( function(){
+      var from = !{JSON.stringify(from)};
+      var to = !{JSON.stringify(to)};
+      var dest = to;
+      var origin = from;
+      function timeConverter(UNIX_timestamp){
+        var a = new Date(UNIX_timestamp*1000);
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var hour = a.getHours();
+        var min = a.getMinutes();
+        var sec = a.getSeconds();
+        return date;
+      }
+      function b(latitude, longitude){
+        var apiKey = '706c386921e262c76e7f8801b02e8c85';
+        var url = 'https://api.forecast.io/forecast/';
+        var lati = latitude;
+        var longi = longitude;
+        var x = [];
+        $.getJSON(url + apiKey + "/" + lati + "," + longi + "?callback=?", function(data) {
+          var high = [];
+          var low = [];
+          for(i = 0; i < 6; i++) {
+            x.push(data.daily.data[i].icon);
+            high.push(data.daily.data[i].temperatureMax);
+            low.push(data.daily.data[i].temperatureMin)
+          }
+          console.log(x);
+            get_next_7_day_forcast(x, high, low);
+        });
+        return x;
+      }
+      function get_high_low(city, country) {
+        var url = "https://maps.googleapis.com/maps/api/geocode/json?address=+" + city + ",+" + country + "&key=AIzaSyBT6-6KYw_7sfruJivjSAMfVH699u-8ql8";
+        console.log("url is " + url);
+        var icons;
+        $.getJSON(url, function (json) {
+          var latitude = json.results[0].geometry.location.lat;
+          var longitude = json.results[0].geometry.location.lng;
+          console.log('Latitude : ', latitude);
+          console.log('Longitude : ', longitude);
+          icons = b(latitude, longitude);
+          console.log(icons);
+        });
+        return icons;
+      }
+
+      function get_next_7_day_forcast(arr, high, low) {
+        console.log(high);
+        var today = new Date();
+        var day = today.getDate();
+        var month = today.getMonth() + 1;
+        var skycons = new Skycons({"color": "white"});
+
+        for(i = 0; i < arr.length; i ++) {
+          day = day + i;
+          var num = i + 1;
+          var icon = "icon" + num;
+
+          switch(arr[i]) {
+            case "clear-day":
+              skycons.add(icon, Skycons.CLEAR_DAY);
+              document.getElementById("weather_date" + num).innerHTML = "<center>" + month + "/" + day + ": clear <br />H: " + high[i] + "F<br />L: " + low[i] +  "F</center>";
+              break;
+            case "partly-cloudy-day":
+              skycons.add(icon, Skycons.PARTLY_CLOUDY_DAY);
+              document.getElementById("weather_date" + num).innerHTML ="<center>" + month + "/" + day + ": partly cloudy<br />H: " + high[i] + "F<br />L: " + low[i] +  "F</center>";
+              break;
+            case "partly-cloudy-night":
+              skycons.add(icon, Skycons.PARTLY_CLOUDY_NIGHT);
+              document.getElementById("weather_date" + num).innerHTML ="<center>" + month + "/" + day + ": partly cloudy night<br />H: " + high[i] + "F<br />L: " + low[i] +  "F</center>";
+              break;
+            case "cloudy":
+              skycons.add(icon, Skycons.CLOUDY);
+              document.getElementById("weather_date" + num).innerHTML ="<center>" + month + "/" + day + ": cloudy<br />H: " + high[i] + "F<br />L: " + low[i] +  "F</center>";
+              break;
+            case "rain":
+              skycons.add(icon, Skycons.RAIN);
+              document.getElementById("weather_date" + num).innerHTML ="<center>" + month + "/" + day + ": rainy<br />H: " + high[i] +  "F<br />L: " + low[i] + "F</center>";
+              break;
+            case "sleet":
+              skycons.add(icon, Skycons.SLEET);
+              document.getElementById("weather_date" + num).innerHTML ="<center>" + month + "/" + day + ": sleet<br />H: " + high[i] + "F<br />L: " + low[i] +  "F</center>";
+              break;
+            case "snow":
+              skycons.add(icon, Skycons.SNOW);
+              document.getElementById("weather_date" + num).innerHTML ="<center>" + month + "/" + day + ": snowy<br />H: " + high[i] +"F<br />L: " + low[i] +  "F</center>";
+              break;
+            case "wind":
+              skycons.add(icon, Skycons.WIND);
+              document.getElementById("weather_date" + num).innerHTML ="<center>" + month + "/" + day + ": windy<br />H: " + high[i] +"F<br />L: " + low[i] +   "F</center>";
+              break;
+            case "fog":
+              skycons.add(icon, Skycons.FOG);
+              document.getElementById("weather_date" + num).innerHTML ="<center>" + month + "/" + day + ": fog<br />H: " + high[i] + "F<br />L: " + low[i] +  "F</center>";
+              break;
+            }
+          }
+        skycons.play();
+      }
+      document.getElementById("destination").innerHTML = origin.city + " &nbsp; &nbsp;  ✈  &nbsp; &nbsp; " + dest.city;
+      var toCurrency = dest.currency;
+      var fromCurrency = origin.currency;
+      $.ajax({
+        url: "http://devel.farebookings.com/api/curconversor/"+fromCurrency+"/"+toCurrency+"/1/",
+        dataType: 'jsonp'
+      }).done(function(data) {
+        document.getElementById("currency").innerHTML = document.getElementById("currency").innerHTML + "<br /> 1 " + fromCurrency + " = " + data[toCurrency] + " " + toCurrency;
+      });
+      $('#currency').css("background-color", "yellow"); //another way 
+      URL1 = 'https://airport.api.aero/airport/nearest/' + dest.latitude + '/' + dest.longitude + '?maxAirports=3&user_key=93ab38ecf65cfd38926e50f0f113c8b6'
+      URL2 = 'https://airport.api.aero/airport/nearest/' + origin.latitude + '/' + origin.longitude + '?maxAirports=3&user_key=93ab38ecf65cfd38926e50f0f113c8b6'
+      $.ajax({
+        url: URL1,
+        dataType: 'jsonp'
+      }).done(function(data) {
+        dest.airportcode = data.airports[0].code;
+
+      });
+      $.ajax({
+        url: URL2,
+        dataType: 'jsonp'
+      }).done(function(data) {
+        origin.airportcode = data.airports[0].code;
+        $.ajax({
+          url: 'https://flightlookup-timetable-rest.p.mashape.com/TimeTable/' + origin.airportcode + '/' + dest.airportcode + '/05/04/2015/?Count=3',
+          headers: {
+            "X-Mashape-Key": "YjYRxTEIUpmshLFa4Omwy69Fq59Up1EBEqojsnJdPplx2Ddsx3",
+            "Accept": "text/plain" 
+          }
+        }).done(function(flightsdata) {
+          var flights = [];
+          var i = 0;
+          $(flightsdata).find("route").each(function() {
+            flights[i] = {
+              distance: $(this).attr("Distance") + " KM",
+              duration: $(this).attr("Duration"),
+              flight_numbers: $(this).attr("FlightNumbers.3"),
+              flight_time: $(this).attr("FlightTime"),
+            }
+            i++;
+          });
+          get_high_low(dest["name"], dest["country"]);
+          if(dest["timezone"].length != 0)
+            $('#time_zone').append("Time Zone: &nbsp;" + dest["timezone"]);
+
+          if(dest["population"].length != 0)
+            $('#population').append("Population: &nbsp;" + dest["population"]);
+
+          if(dest["population_density"].length != 0)
+            $('#pop_density').append("Population Density: &nbsp;" + dest["population_density"]);
+
+          if(dest["elevation"].length != 0)
+            $('#elevation').append("Elevation: &nbsp;" + dest["elevation"]);
+
+          if(dest["postal_code"].length != 0)
+            $('#postal_code').append("Postal Code: &nbsp;" + dest["postal_code"]);
+
+          if(dest["latitude"].length != 0)
+            $('#dlatitude').append("Latitude: &nbsp;" + dest["latitude"]);
+
+          if(dest["longitude"].length != 0)
+            $('#dlongitude').append("Longitude: &nbsp;" + dest["longitude"]);
+
+          if(dest["website"].length != 0)
+            $('#website').append('<a id="website_link" href="' + dest["website"] + '">' + dest["website"] + '<br />');
+
+          if(dest["flag_photo"].length != 0) {
+            $('#flag').append('<iframe src="' + dest["flag_photo"] + '"width="100%" height="500" margin="0" padding="0" border="none" overflow="hidden" scrolling="no"></iframe>');
+          }
+          else if(dest["flag_photo"].length == 0) {
+            var element = document.getElementById("wiki_images");
+            element.parentNode.removeChild(element);
+          }
+
+          $('#Demographics').css('padding-bottom', '25px');
+          $('#Demographics').css('background-color', 'blue');
+        });
+      });
+    });
+
+
+

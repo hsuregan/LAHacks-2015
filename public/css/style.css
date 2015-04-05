@@ -7,40 +7,45 @@ button:focus {
     outline: none;
 }
 
+
+
+
+#weather_date1, #weather_date2, #weather_date3, #weather_date4, #weather_date5, #weather_date6
+{
+	width: 50% !important;
+}
+
+.weather_date
+{
+	width: 40% !important;
+	background-color: pink !important;
+}
+
+#forcast
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 70%;
+	background-color: yellow;
+}
+
 #dest
 {
 	color: #006400 !important;
 }
 
-#location {
-	width: 50%;
-	margin: 0;
-	text-align: center;
-	float: left;
+#dest #dest
+{
+	border-color: #006400;
 }
 
-#destination {
-	width: 50%;
-	margin: 0;
-	float: left;
-	text-align: center;
-}
-
-h1 {
-	font-size: 55px;
-}
-
-hr {
+hr
+{
 	border-color: #006400;
 	color: white;
 	width: 80%;
 	height: 3px;
 	background-color: #006400;
-}
-
-.enter {
-	margin-top: 50px;
-	clear: both;
 }
 
 html
@@ -54,14 +59,14 @@ form
 	margin-left: auto;
 	margin-right: auto;
 }
-.ff_elem {
+.ff_elem
+{
 	margin-top: 2%;
 	background-color: #6ff36e;
 	border: solid white 5px;
 	color: white;
 	font-size: 40px;
 	padding: 10px;
-	color: #006400 !important;
 }
 
 input[type="text"] {
@@ -98,6 +103,5 @@ body
 {
 	color: white;
 	font-size: 40px;
-	font-weight: lighter;
 	background-color: #6ff36e;
 }

@@ -3,7 +3,9 @@ var router = express.Router();
 var http = require("http");
 var cheerio = require('cheerio');
 var tabletojson = require('tabletojson');
-var request = require("request")
+var request = require("request");
+var rsj = require('rsj');
+var parseString = require('xml2js').parseString;
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -48,13 +50,13 @@ router.get ('/:from/:to', function(req, res) {
 					DESTINATION.abstract = json[i].Value.substring(0, 1000)
 				}
 				if (json[i].Property === 'dbpedia-owl:elevation') {
-					DESTINATION.elevation = json[i].Value
+					DESTINATION.elevation = json[i].Value.split(' ')[0]
 				}
 				if (json[i].Property === 'dbpedia-owl:populationDensity') {
-					DESTINATION.population_density = json[i].Value
+					DESTINATION.population_density = json[i].Value.split(' ')[0]
 				}
 				if (json[i].Property === 'dbpedia-owl:populationTotal') {
-					DESTINATION.population_total = json[i].Value
+					DESTINATION.population_total = json[i].Value.split(' ')[0]
 				}
 				if (json[i].Property === 'dbpedia-owl:thumbnail') {
 					DESTINATION.photo = json[i].Value
@@ -63,24 +65,62 @@ router.get ('/:from/:to', function(req, res) {
 					DESTINATION.flag_photo = 'http://en.wikipedia.org/wiki/' + DESTINATION.city.replace(' ', '_') + '#/media/File:' + json[i].Value.replace(' ', '_')
 				}
 				if (json[i].Property === 'dbpprop:postalCode') {
-					DESTINATION.postal_code = json[i].Value
+					DESTINATION.postal_code = json[i].Value.split(' ')[0]
 				}
 				if (json[i].Property === 'dbpprop:website') {
 					DESTINATION.website = json[i].Value
 				}
 				if (json[i].Property === 'dbpprop:timezone') {
-					DESTINATION.timezone = json[i].Value
+					DESTINATION.timezone = json[i].Value.replace('dbpedia:', '')
 				}
 				if (json[i].Property === 'geo:lat') {
-					DESTINATION.latitude = json[i].Value
+					DESTINATION.latitude = json[i].Value.split(' ')[0]
 				}
 				if (json[i].Property === 'geo:long') {
-					DESTINATION.longitude = json[i].Value
+					DESTINATION.longitude = json[i].Value.split(' ')[0]
 				}
 			}
-			res.render('cards', {
-				from: HOME,
-				to: DESTINATION
+			request({url: 'http://localhost:3000/city/info/' + HOME.city, json: true}, function(err, response, jsonl) {
+				if (err) {
+					throw err;
+				}
+				for (i in jsonl) {
+					if (jsonl[i].Property === 'dbpprop:website') {
+						HOME.website = jsonl[i].Value
+					}
+					if (jsonl[i].Property === 'dbpedia-owl:populationDensity') {
+						HOME.population_density = jsonl[i].Value.split(' ')[0]
+					}
+					if (jsonl[i].Property === 'dbpedia-owl:populationTotal') {
+						HOME.population_total = jsonl[i].Value.split(' ')[0]
+					}
+					if (jsonl[i].Property === 'geo:lat') {
+						HOME.latitude = jsonl[i].Value.split(' ')[0]
+						console.log(HOME.latitude)
+					}
+					if (jsonl[i].Property === 'geo:long') {
+						HOME.longitude = jsonl[i].Value.split(' ')[0]
+						console.log(HOME.longitude)
+					}
+				}
+				res.render('cards', {
+					from: HOME,
+					to: DESTINATION
+				});
+				airportURL1 = 'https://airport.api.aero/airport/nearest/' + DESTINATION.latitude + '/' + DESTINATION.longitude + '?maxAirports=3&user_key=93ab38ecf65cfd38926e50f0f113c8b6'
+				request({url: airportURL1, json: true}, function(err, response, json) {
+					if (err) {
+						throw err;
+					}
+					var airports = json.airports;
+					DESTINATION.airports = airports;
+					airportURL2 = 'https://airport.api.aero/airport/nearest/' + HOME.latitude + '/' + HOME.longitude + '?maxAirports=3&user_key=93ab38ecf65cfd38926e50f0f113c8b6'
+					request({url: airportURL2, json: true}, function(err, response, json2) {
+						var airports2 = json2.airports;
+						HOME.airports = airports;
+						
+					});
+				});
 			});
 		});
 	});

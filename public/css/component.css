@@ -1,20 +1,35 @@
+#back
+{
+	font-size: 5vw;
+	position: absolute;
+}
+
 #destination
 {
 	text-align: center;
 	font-size: 5vw;
+	color: blue !important;
+	font-weight: bold;
+}
+
+iframe {
+	border: none !important;
 }
 
 .tile
 {
 	text-align: center;
 	background-color: blue;
-	height: 500px;
+	padding: 5% !important;
 }
 
 .tile_title
 {
-	font-size: 3vw;
+	font-size: 4vw !important;
+	font-weight: lighter;
+	color: white;
 }
+
 .grid {
 	max-width: 69em;
 	list-style: none;
