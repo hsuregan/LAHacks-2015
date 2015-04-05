@@ -1,0 +1,543 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="description" content="See current prices by city. These data are refreshed continuously. It is showing prices for cities for which we have full data set." />
+            <script type="text/javascript" src="../common/numbeo_standard.js"></script>
+    <link type="text/css" href="../common/css/redmond/jquery-ui-1.10.3.custom.min.css" rel="Stylesheet" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
+    <!-- script src="http://platform.linkedin.com/in.js" type="text/javascript"></script -->
+    <script type="text/javascript" src="../common/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../common/js/jquery-ui-1.10.3.custom.min.js"></script>
+   <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+    <link rel="stylesheet" type="text/css" href="../common/style.css" />
+    <link rel="stylesheet" type="text/css" href="../common/style_desktop.css" />
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#nav-one li").hover(
+		function(){ $("ul", this).fadeIn("fast"); },
+		function() { }
+	);
+	if (document.all) {
+		$("#nav-one li").hoverClass ("sfHover");
+	}
+});
+$.fn.hoverClass = function(c) {
+	return this.each(function(){
+		$(this).hover(
+			function() { $(this).addClass(c);  },
+			function() { $(this).removeClass(c); }
+		);
+	});
+};
+</script>
+<script type="text/javascript" src="../common/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../common/css/datatables/jquery.dataTables_themeroller.css"/>
+
+  <script type="text/javascript">
+
+    function checkControls() {
+
+      enableIfElementsHaveSomeValue("calculate", /* to check */ "itemId", "displayCurrency");
+
+    }
+
+  </script>
+
+  <title>Prices By City</title>
+
+</head>
+
+<body>
+
+<div class="logo-and-upper-ad">
+<div class="innerWidth-header">
+<table style="border-spacing: 0px;" >
+<tr>
+<td width="267px;" style="padding-top: 6px; padding-bottom: 6px;">
+<a href="http://www.numbeo.com/common/" style="border: 0; text-decoration:none;"><img style="border: 0; text-decoration: none; height: 70px; " src="http://www.numbeo.com/images/numbeo_h70px.png" alt="Numbeo"/></a>
+</td>
+<td style="padding-right: 0px; padding-left:3px; padding-top: 13px; padding-bottom: 13px; vertical-align: middle; " width="745px" align="right">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-8993465169534557";
+/* numbeo2_leaderboard_upper */
+google_ad_slot = "9258134237";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</td>
+</tr>
+</table>
+</div> <!-- innerWidth-header -->
+</div> <!-- logo-and-upper-ad -->
+<div class="dropdown-outer">
+<div class="innerWidth-header">
+<div class="before-nav">
+    <ul id="nav-one" class="nav">
+
+	<li class="dir">
+<a href="http://www.numbeo.com/cost-of-living/">Cost Of Living</a>
+  <ul>
+    <li><a href="http://www.numbeo.com/cost-of-living/">Cost Of Living</a></li>
+    <li><a href="http://www.numbeo.com/cost-of-living/comparison.jsp">Cost of Living Comparison</a></li>
+    <li><a href="http://www.numbeo.com/cost-of-living/calculator.jsp">Cost of Living Calculator</a></li>
+    <li><a href="http://www.numbeo.com/cost-of-living/rankings.jsp">Cost Of Living Index</a></li>
+    <li><a href="http://www.numbeo.com/cost-of-living/rankings_current.jsp">Cost Of Living Index (Current)</a></li>
+    <li><a href="http://www.numbeo.com/cost-of-living/rankings_by_country.jsp">Cost Of Living Rankings By Country</a></li>
+    <li><a href="http://www.numbeo.com/cost-of-living/prices_by_city.jsp">Prices By City</a></li>
+    <li><a href="http://www.numbeo.com/cost-of-living/prices_by_country.jsp">Prices By Country</a></li>
+    <li><a href="http://www.numbeo.com/food-prices/">Food Prices</a></li>
+    <li><a href="http://www.numbeo.com/cost-of-living/basket_of_goods.jsp">Basket of Goods and Services</a></li>
+    <li><a href="http://www.numbeo.com/cost-of-living/historical-data">Historical Data in a City by Year </a></li>
+    <li><a href="http://www.numbeo.com/cost-of-living/historical-prices-by-city">Historical Data in a Year by City</a></li>
+    <li><a href="http://www.numbeo.com/cost-of-living/estimator_main">Cost of Living Estimator</a></li>
+    <li><a href="http://www.numbeo.com/cost-of-living/analysis_main">Cost of Living Analysis</a></li>
+    <li><a href="http://www.numbeo.com/common/motivation_and_methodology.jsp">Our Motivation and Methodology</a></li>
+    <li><a href="http://www.numbeo.com/cost-of-living/contribute.jsp">Update Information for Your City</a></li>
+  </ul></li>
+
+	<li class="dir">
+<a href="http://www.numbeo.com/property-investment/">Property Prices</a>
+  <ul>
+    <li><a href="http://www.numbeo.com/property-investment/">Property Prices</a></li>
+    <li><a href="http://www.numbeo.com/property-investment/comparison.jsp">Property Prices Comparison</a></li>
+    <li><a href="http://www.numbeo.com/property-investment/rankings.jsp">Property Price Index</a></li>
+    <li><a href="http://www.numbeo.com/property-investment/rankings_current.jsp">Property Price Index Rate (Current)</a></li>
+    <li><a href="http://www.numbeo.com/property-investment/rankings_by_country.jsp">Property Price Index By Country</a></li>
+   </ul></li>
+
+	<li class="dir">
+<a href="http://www.numbeo.com/crime/">Crime</a>
+  <ul>
+    <li><a href="http://www.numbeo.com/crime/">Crime</a></li>
+    <li><a href="http://www.numbeo.com/crime/comparison.jsp">Crime Comparisons</a></li>
+    <li><a href="http://www.numbeo.com/crime/rankings_current.jsp">Crime Index Rate Latest</a></li>
+    <li><a href="http://www.numbeo.com/crime/rankings.jsp">Crime Index</a></li>
+    <li><a href="http://www.numbeo.com/crime/rankings_by_country.jsp">Crime Index by Country</a></li>
+  </ul></li>
+
+	<li class="dir">
+<a href="http://www.numbeo.com/health-care/">Health Care</a>
+  <ul>
+    <li><a href="http://www.numbeo.com/health-care/">Health Care</a></li>
+    <li><a href="http://www.numbeo.com/health-care/comparison.jsp">Health Care Comparisons</a></li>
+    <li><a href="http://www.numbeo.com/health-care/rankings_current.jsp">Health Care Index Rate Latest</a></li>
+    <li><a href="http://www.numbeo.com/health-care/rankings.jsp">Health Care Index</a></li>
+    <li><a href="http://www.numbeo.com/health-care/rankings_by_country.jsp">Health Care Index by Country</a></li>
+  </ul></li>
+
+	<li class="dir">
+<a href="http://www.numbeo.com/pollution/">Pollution</a>
+  <ul>
+    <li><a href="http://www.numbeo.com/pollution/">Pollution</a></li>
+    <li><a href="http://www.numbeo.com/pollution/comparison.jsp">Pollution Comparisons</a></li>
+    <li><a href="http://www.numbeo.com/pollution/rankings_current.jsp">Pollution Index Rate Latest</a></li>
+    <li><a href="http://www.numbeo.com/pollution/rankings.jsp">Pollution Index</a></li>
+    <li><a href="http://www.numbeo.com/pollution/rankings_by_country.jsp">Pollution Index by Country</a></li>
+  </ul></li>
+
+	<li class="dir">
+<a href="http://www.numbeo.com/traffic/">Traffic</a>
+  <ul>
+     <li><a href="http://www.numbeo.com/traffic/">Traffic</a></li>
+     <li><a href="http://www.numbeo.com/traffic/comparison.jsp">Traffic Comparisons</a></li>
+     <li><a href="http://www.numbeo.com/traffic/rankings_current.jsp">Traffic Index Rate Latest</a></li>
+     <li><a href="http://www.numbeo.com/traffic/rankings.jsp">Traffic Index</a></li>
+     <li><a href="http://www.numbeo.com/traffic/rankings_by_country.jsp">Traffic Index by Country</a></li>
+  </ul></li>
+
+	<li class="dir">
+<a href="http://www.numbeo.com/quality-of-life/">Quality Of Life</a>
+  <ul>
+    <li><a href="http://www.numbeo.com/quality-of-life/">Quality of Life</a></li>
+    <li><a href="http://www.numbeo.com/quality-of-life/comparison.jsp">Quality of Life Comparisons</a></li>
+    <li><a href="http://www.numbeo.com/quality-of-life/rankings_current.jsp">Quality of Life Index Rate Latests</a></li>
+    <li><a href="http://www.numbeo.com/quality-of-life/rankings.jsp">Quality of Life Index</a></li>
+    <li><a href="http://www.numbeo.com/quality-of-life/rankings_by_country.jsp">Quality of Life Index by Country</a></li>
+	</ul></li>
+	<li class="dir">
+<a href="#">Travel</a>
+  <ul>
+    <li><a href="http://www.numbeo.com/taxi-fare/">Taxi Fare Calculator</a></li>
+    <li><a href="http://www.numbeo.com/gas-prices/">Gas Prices Calculator</a></li>
+    <li><a href="http://www.numbeo.com/hotel-prices/">Hotel Prices</a></li>
+	</ul></li>
+
+
+</ul>
+<br clear="all" />
+</div> <!-- end before-nav -->
+</div> <!-- innerWidth-header -->
+</div> <!-- dropdown-outer -->
+<div class="innerWidth">
+ <div class="mid-ads-no-float">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-8993465169534557";
+/* numbeo4_0_ad_no_float_mid */
+google_ad_slot = "7973925517";
+google_ad_width = 970;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+ </div> <!- mid-ads-no-float -->
+<p/>
+<div class="breadcrumb"><img src="http://www.numbeo.com/images/home.png" class="image_without_border hide_smaller_than_600" />
+<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+<a href="http://www.numbeo.com/common/" itemprop="url" class="breadcrumb_link"><span itemprop="title">Numbeo</span></a></span>
+ <span style="font-size: 75%; display: inline-block;">&gt;</span> <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+<a href="http://www.numbeo.com/cost-of-living/" itemprop="url" class="breadcrumb_link"><span itemprop="title">Cost of Living</span></a></span>
+ <span style="font-size: 75%; display: inline-block;">&gt;</span> <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+<a href="http://www.numbeo.com/cost-of-living/prices_by_city.jsp"  itemprop="url"  class="breadcrumb_link"><span itemprop="title">Prices by City</span></a></span>
+</div>
+    <h1> Prices By City</h1>
+<!-- social share start -->
+<table class="social_share" >
+<tr>
+<td height="22px" class="social-inner">
+<fb:like send="false" layout="button_count" width="80" show_faces="false" action="like"></fb:like>
+</td>
+<td height="22px" class="social-inner">
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="Numbeo" data-related="mladenadamovic" rel="nofollow">Tweet</a></td>
+<td height="22px" class="social-inner">
+<g:plusone size="medium"></g:plusone>
+</td>
+</tr>
+</table>
+
+
+<!-- Column 1 start -->
+<!-- ad1_upper ommitted -->
+
+
+<div id="page_container">
+
+<table class="table_indices" align="center">
+<tr><td>
+This page allows you to see current prices by city.
+</td></tr>
+<tr><td>
+    You can see prices only for cities for which we have full data set.
+</td></tr>
+</table>
+  <p/>
+  If you want to see prices by country basis, you can use <a href="prices_by_country.jsp">Prices by Country</a>.
+<p/>&nbsp;<p/>
+
+<!-- form for selecting items -->
+<form method="get" action="http://www.numbeo.com/cost-of-living/prices_by_city.jsp">
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tr><td>Currency to display the values in : </td><td>
+         <select id="displayCurrency" name="displayCurrency" onchange="checkControls();">
+             <option value="EUR">EUR</option>
+             <option value="USD" selected="selected">USD</option>
+             <option value="---">---</option>
+             <option value="AED">AED</option>
+             <option value="AFN">AFN</option>
+             <option value="ALL">ALL</option>
+             <option value="AMD">AMD</option>
+             <option value="ANG">ANG</option>
+             <option value="AOA">AOA</option>
+             <option value="AUD">AUD</option>
+             <option value="AWG">AWG</option>
+             <option value="AZN">AZN</option>
+             <option value="BAM">BAM</option>
+             <option value="BBD">BBD</option>
+             <option value="BDT">BDT</option>
+             <option value="BGN">BGN</option>
+             <option value="BHD">BHD</option>
+             <option value="BIF">BIF</option>
+             <option value="BMD">BMD</option>
+             <option value="BND">BND</option>
+             <option value="BOB">BOB</option>
+             <option value="BRL">BRL</option>
+             <option value="BSD">BSD</option>
+             <option value="BTN">BTN</option>
+             <option value="BWP">BWP</option>
+             <option value="BYR">BYR</option>
+             <option value="BZD">BZD</option>
+             <option value="CAD">CAD</option>
+             <option value="CDF">CDF</option>
+             <option value="CHF">CHF</option>
+             <option value="CLF">CLF</option>
+             <option value="CLP">CLP</option>
+             <option value="CNH">CNH</option>
+             <option value="CNY">CNY</option>
+             <option value="COP">COP</option>
+             <option value="CRC">CRC</option>
+             <option value="CUP">CUP</option>
+             <option value="CVE">CVE</option>
+             <option value="CYP">CYP</option>
+             <option value="CZK">CZK</option>
+             <option value="DEM">DEM</option>
+             <option value="DJF">DJF</option>
+             <option value="DKK">DKK</option>
+             <option value="DOP">DOP</option>
+             <option value="DZD">DZD</option>
+             <option value="ECS">ECS</option>
+             <option value="EGP">EGP</option>
+             <option value="ERN">ERN</option>
+             <option value="EUR">EUR</option>
+             <option value="FJD">FJD</option>
+             <option value="FKP">FKP</option>
+             <option value="FRF">FRF</option>
+             <option value="GBP">GBP</option>
+             <option value="GEL">GEL</option>
+             <option value="GIP">GIP</option>
+             <option value="GMD">GMD</option>
+             <option value="GNF">GNF</option>
+             <option value="GTQ">GTQ</option>
+             <option value="GYD">GYD</option>
+             <option value="HKD">HKD</option>
+             <option value="HNL">HNL</option>
+             <option value="HRK">HRK</option>
+             <option value="HTG">HTG</option>
+             <option value="HUF">HUF</option>
+             <option value="IDR">IDR</option>
+             <option value="IEP">IEP</option>
+             <option value="ILS">ILS</option>
+             <option value="INR">INR</option>
+             <option value="IQD">IQD</option>
+             <option value="ISK">ISK</option>
+             <option value="ITL">ITL</option>
+             <option value="JMD">JMD</option>
+             <option value="JOD">JOD</option>
+             <option value="JPY">JPY</option>
+             <option value="KES">KES</option>
+             <option value="KGS">KGS</option>
+             <option value="KHR">KHR</option>
+             <option value="KMF">KMF</option>
+             <option value="KPW">KPW</option>
+             <option value="KRW">KRW</option>
+             <option value="KWD">KWD</option>
+             <option value="KYD">KYD</option>
+             <option value="KZT">KZT</option>
+             <option value="LAK">LAK</option>
+             <option value="LBP">LBP</option>
+             <option value="LKR">LKR</option>
+             <option value="LRD">LRD</option>
+             <option value="LSL">LSL</option>
+             <option value="LTL">LTL</option>
+             <option value="LVL">LVL</option>
+             <option value="LYD">LYD</option>
+             <option value="MAD">MAD</option>
+             <option value="MDL">MDL</option>
+             <option value="MGA">MGA</option>
+             <option value="MKD">MKD</option>
+             <option value="MNT">MNT</option>
+             <option value="MOP">MOP</option>
+             <option value="MRO">MRO</option>
+             <option value="MUR">MUR</option>
+             <option value="MVR">MVR</option>
+             <option value="MWK">MWK</option>
+             <option value="MXN">MXN</option>
+             <option value="MXV">MXV</option>
+             <option value="MYR">MYR</option>
+             <option value="MZN">MZN</option>
+             <option value="NAD">NAD</option>
+             <option value="NGN">NGN</option>
+             <option value="NIO">NIO</option>
+             <option value="NOK">NOK</option>
+             <option value="NPR">NPR</option>
+             <option value="NZD">NZD</option>
+             <option value="OMR">OMR</option>
+             <option value="PAB">PAB</option>
+             <option value="PEN">PEN</option>
+             <option value="PGK">PGK</option>
+             <option value="PHP">PHP</option>
+             <option value="PKR">PKR</option>
+             <option value="PLN">PLN</option>
+             <option value="PYG">PYG</option>
+             <option value="QAR">QAR</option>
+             <option value="RON">RON</option>
+             <option value="RSD">RSD</option>
+             <option value="RUB">RUB</option>
+             <option value="RWF">RWF</option>
+             <option value="SAR">SAR</option>
+             <option value="SBD">SBD</option>
+             <option value="SCR">SCR</option>
+             <option value="SDG">SDG</option>
+             <option value="SEK">SEK</option>
+             <option value="SGD">SGD</option>
+             <option value="SHP">SHP</option>
+             <option value="SIT">SIT</option>
+             <option value="SLL">SLL</option>
+             <option value="SOS">SOS</option>
+             <option value="SRD">SRD</option>
+             <option value="STD">STD</option>
+             <option value="SVC">SVC</option>
+             <option value="SYP">SYP</option>
+             <option value="SZL">SZL</option>
+             <option value="THB">THB</option>
+             <option value="TJS">TJS</option>
+             <option value="TMT">TMT</option>
+             <option value="TND">TND</option>
+             <option value="TOP">TOP</option>
+             <option value="TRY">TRY</option>
+             <option value="TTD">TTD</option>
+             <option value="TWD">TWD</option>
+             <option value="TZS">TZS</option>
+             <option value="UAH">UAH</option>
+             <option value="UGX">UGX</option>
+             <option value="USD" selected="selected">USD</option>
+             <option value="UYU">UYU</option>
+             <option value="VND">VND</option>
+             <option value="VUV">VUV</option>
+             <option value="WST">WST</option>
+             <option value="XAF">XAF</option>
+             <option value="XCD">XCD</option>
+             <option value="XDR">XDR</option>
+             <option value="XOF">XOF</option>
+             <option value="XPF">XPF</option>
+             <option value="YER">YER</option>
+             <option value="ZAR">ZAR</option>
+             <option value="ZMW">ZMW</option>
+             <option value="ZWL">ZWL</option>
+         </select>
+<span class="small_font"><a href="http://www.numbeo.com/common/currency_settings.jsp?return=%2Fcost-of-living%2Fprices_by_city.jsp%3FdisplayCurrency%3DUSD">Default Currency</a></span>
+    </td></tr>
+    <tr><td>Please select data of your interest: </td><td> <select  multiple="multiple" size="15"  name="itemId" id="itemId" onchange="checkControls();" >
+<option value="101">Buy Apartment Price : Price per Square Meter to Buy Apartment Outside of Centre</option>
+<option value="100">Buy Apartment Price : Price per Square Meter to Buy Apartment in City Centre</option>
+<option value="60">Clothing And Shoes : 1 Pair of Jeans (Levis 501 Or Similar)</option>
+<option value="66">Clothing And Shoes : 1 Pair of Men Leather Shoes</option>
+<option value="64">Clothing And Shoes : 1 Pair of Nike Running Shoes</option>
+<option value="62">Clothing And Shoes : 1 Summer Dress in a Chain Store (Zara, H&M, ...)</option>
+<option value="110">Markets : Apples (1kg)</option>
+<option value="14">Markets : Bottle of Wine (Mid-Range)</option>
+<option value="19">Markets : Chicken Breasts (Boneless, Skinless), (1kg)</option>
+<option value="15">Markets : Domestic Beer (0.5 liter bottle)</option>
+<option value="11">Markets : Eggs (12)</option>
+<option value="16">Markets : Imported Beer (0.33 liter bottle)</option>
+<option value="113">Markets : Lettuce (1 head)</option>
+<option value="9">Markets : Loaf of Fresh White Bread (500g)</option>
+<option value="12">Markets : Local Cheese (1kg)</option>
+<option value="8">Markets : Milk (regular), (1 liter)</option>
+<option value="111">Markets : Oranges (1kg)</option>
+<option value="17">Markets : Pack of Cigarettes (Marlboro)</option>
+<option value="112">Markets : Potato (1kg)</option>
+<option value="115">Markets : Rice (white), (1kg)</option>
+<option value="116">Markets : Tomato (1kg)</option>
+<option value="13">Markets : Water (1.5 liter bottle)</option>
+<option value="27">Rent Per Month : Apartment (1 bedroom) Outside of Centre</option>
+<option value="26">Rent Per Month : Apartment (1 bedroom) in City Centre</option>
+<option value="29">Rent Per Month : Apartment (3 bedrooms) Outside of Centre</option>
+<option value="28">Rent Per Month : Apartment (3 bedrooms) in City Centre</option>
+<option value="114">Restaurants : Cappuccino (regular)</option>
+<option value="6">Restaurants : Coke/Pepsi (0.33 liter bottle)</option>
+<option value="4">Restaurants : Domestic Beer (0.5 liter draught)</option>
+<option value="5">Restaurants : Imported Beer (0.33 liter bottle)</option>
+<option value="3">Restaurants : McMeal at McDonalds (or Equivalent Combo Meal)</option>
+<option value="2">Restaurants : Meal for 2, Mid-range Restaurant, Three-course</option>
+<option value="1">Restaurants : Meal, Inexpensive Restaurant</option>
+<option value="7">Restaurants : Water (0.33 liter bottle) </option>
+<option value="105">Salaries And Financing : Average Monthly Disposable Salary (After Tax)</option>
+<option value="106">Salaries And Financing : Mortgage Interest Rate in Percentages (%), Yearly</option>
+<option value="44">Sports And Leisure : Cinema, International Release, 1 Seat</option>
+<option value="40">Sports And Leisure : Fitness Club, Monthly Fee for 1 Adult</option>
+<option value="42">Sports And Leisure : Tennis Court Rent (1 Hour on Weekend)</option>
+<option value="24">Transportation : Gasoline (1 liter)</option>
+<option value="20">Transportation : Monthly Pass (Regular Price)</option>
+<option value="18">Transportation : One-way Ticket (Local Transport)</option>
+<option value="109">Transportation : Taxi 1hour Waiting (Normal Tariff)</option>
+<option value="108">Transportation : Taxi 1km (Normal Tariff)</option>
+<option value="107">Transportation : Taxi Start (Normal Tariff)</option>
+<option value="25">Transportation : Volkswagen Golf 1.4 90 KW Trendline (Or Equivalent New Car)</option>
+<option value="32">Utilities (Monthly) : 1 min. of Prepaid Mobile Tariff Local (No Discounts or Plans)</option>
+<option value="30">Utilities (Monthly) : Basic (Electricity, Heating, Water, Garbage) for 85m2 Apartment</option>
+<option value="33">Utilities (Monthly) : Internet (6 Mbps, Unlimited Data, Cable/ADSL)</option>
+</select>
+ </td></tr>
+  <tr><td colspan="2" align="center">  <input type="submit" value="Show" id="calculate" disabled="true" /> </td> </tr>
+  </table>
+</form>
+<p/>
+
+    <script type="text/javascript">
+  $(document).ready(function() {
+    $('#t2').dataTable({
+        'bJQueryUI': true,
+        'aLengthMenu': [[10, 25, 50, -1], [10, 25, 50, 'All']],
+        'aaSorting': [[ 1, "desc" ]]
+,        'iDisplayLength': -1
+    });
+  });
+</script>
+
+</div>
+<p/>
+<br/>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-8993465169534557";
+/* numbeo_bottom_30 */
+google_ad_slot = "9804259112";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+
+<br/>
+
+<!-- Column 1 end -->
+
+<div id="fb-root"></div>
+<div class="footer_content">
+     <a href="http://www.numbeo.com/common/about.jsp">About</a> |
+     <a href="http://www.numbeo.com/common/in_the_news.jsp">In the News</a> | 
+     <a href="http://www.numbeo.com/common/join_community.jsp">Newsletter</a> |
+     <a href="http://feeds2.feedburner.com/NumbeoBlog" target="_blank">Blog</a> | 
+     <a href="http://www.numbeo.com/common/api.jsp" rel="nofollow">API</a> 
+<p/>
+<span style="font-style: italic">
+Copyright &copy; 2009-2015 Numbeo. Your use of this service is subject to our 
+<a href="http://www.numbeo.com/common/terms_of_use.jsp">Terms of Use</a> and 
+<a href="http://www.numbeo.com/common/privacy.jsp">Privacy Policy</a>
+</span>
+</div>
+</div> <!-- end of innerWidth --> 
+
+  <script type="text/javascript">
+   window.___gcfg = {
+      lang: 'en-US'
+    };
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js?onload=onLoadCallback';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.async=true;
+js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=182369865155656";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10969791-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+    </body>
+</html>
+
+
+

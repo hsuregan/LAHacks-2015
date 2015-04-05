@@ -1,0 +1,103 @@
+@import url(http://fonts.googleapis.com/css?family=Quicksand:300,400,700);
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+#dest
+{
+	color: #006400 !important;
+}
+
+#location {
+	width: 50%;
+	margin: 0;
+	text-align: center;
+	float: left;
+}
+
+#destination {
+	width: 50%;
+	margin: 0;
+	float: left;
+	text-align: center;
+}
+
+h1 {
+	font-size: 55px;
+}
+
+hr {
+	border-color: #006400;
+	color: white;
+	width: 80%;
+	height: 3px;
+	background-color: #006400;
+}
+
+.enter {
+	margin-top: 50px;
+	clear: both;
+}
+
+html
+{
+	font-family: 'Quicksand', sans-serif;
+	font-weight: bold;
+}
+
+form
+{
+	margin-left: auto;
+	margin-right: auto;
+}
+.ff_elem {
+	margin-top: 2%;
+	background-color: #6ff36e;
+	border: solid white 5px;
+	color: white;
+	font-size: 40px;
+	padding: 10px;
+	color: #006400 !important;
+}
+
+input[type="text"] {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: light;
+}
+
+.field:visited
+{
+	background-color: blue;
+}
+
+.enter
+{
+	border: solid white;
+	background-color: transparent;
+	color: white;
+	font-size: 40px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: normal;
+	transition: background-color 0.5s, font-weight 0.5s;
+
+}
+
+.enter:hover
+{
+	cursor: pointer;
+	background-color: #006400;
+	font-weight: normal;
+	transition: background-color 0.5s, font-weight 0.5s;
+}
+
+body
+{
+	color: white;
+	font-size: 40px;
+	font-weight: lighter;
+	background-color: #6ff36e;
+}

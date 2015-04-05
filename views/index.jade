@@ -1,0 +1,98 @@
+doctype html
+html
+  head
+    link(rel='stylesheet', type='text/css', href='css/style.css')
+    link(href='http://fonts.googleapis.com/css?family=Quicksand:300,400,700', rel='stylesheet', type='text/css')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js', type='text/javascript')
+    link(rel='stylesheet', href='http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/flick/jquery-ui.css')
+    script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+    style(type='text/css').
+      .ui-menu .ui-menu-item a,.ui-menu .ui-menu-item a.ui-state-hover, .ui-menu .ui-menu-item a.ui-state-active {
+      font-weight: normal;
+      margin: -1px;
+      text-align:left;
+      font-size:14px;
+      }
+      .ui-autocomplete-loading {
+      background: white url("/images/ui-anim_basic_16x16.gif") right center no-repeat;
+      }
+  body
+    center
+      h1
+        | Travel Info
+    form#form_demo(action='', method='post', name='form_demo', enctype='multipart/form-data')
+      #location
+        | Going from
+        br
+        input#dest.ff_elem(type='text', value='', name='origin')
+      #destination
+        | Goint to 
+        br
+        input#f_elem_city.ff_elem(type='text', name='', value='')
+    br
+    center
+      input.enter(type='submit', value='Submit')
+  script(type='text/javascript').
+    jQuery(function () {
+    jQuery("#f_elem_city").autocomplete({
+    source: function (request, response) {
+    jQuery.getJSON( "http://gd.geobytes.com/AutoCompleteCity?callback=?&q="+request.term, function (data) {
+    response(data);
+    });
+    },
+    minLength: 3,
+    select: function (event, ui) {
+    var selectedObj = ui.item;
+    jQuery("#f_elem_city").val(selectedObj.value);
+    getcitydetails(selectedObj.value);
+    return false;
+    },
+    open: function () {
+    jQuery(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+    },
+    close: function () {
+    jQuery(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+    }
+    });
+    jQuery("#f_elem_city").autocomplete("option", "delay", 100);
+    jQuery("#dest").autocomplete({
+    source: function (request, response) {
+    jQuery.getJSON("http://gd.geobytes.com/AutoCompleteCity?callback=?&q="+request.term, function (data) {
+    response(data);
+    });
+    },
+    minLength: 3,
+    select: function (event, ui) {
+    var selectedObj = ui.item;
+    jQuery("#dest").val(selectedObj.value);
+    getcitydetails(selectedObj.value);
+    return false;
+    },
+    open: function () {
+    jQuery(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+    },
+    close: function () {
+    jQuery(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+    }
+    });
+    jQuery("#dest").autocomplete("option", "delay", 100);
+    });
+  script.
+    $('.enter').click(function() {
+    var from = $('#f_elem_city').val();
+    var goingto = $('#dest').val();
+    alert(from + ' ' + goingto);
+    document.location.href += from + '/' + goingto;
+    });
+  script(type='text/javascript').
+    WebFontConfig = {
+    google: { families: [ 'Quicksand:300,400,700:latin' ] }
+    };
+    (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+    })();
