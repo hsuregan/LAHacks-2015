@@ -10,7 +10,20 @@
 	font-size: 5vw;
 	color: blue !important;
 	font-weight: bold;
+	margin 0;
 }
+
+#location
+{
+	text-align: center;
+	font-size: 5vw;
+	color: blue !important;
+	font-weight: bold;
+	width: 50%;
+	float: left;
+	margin 0;
+}
+
 
 iframe {
 	border: none !important;

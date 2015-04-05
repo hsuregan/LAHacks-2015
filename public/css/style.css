@@ -7,9 +7,6 @@ button:focus {
     outline: none;
 }
 
-
-
-
 #weather_date1, #weather_date2, #weather_date3, #weather_date4, #weather_date5, #weather_date6
 {
 	width: 50% !important;
@@ -21,6 +18,10 @@ button:focus {
 	background-color: pink !important;
 }
 
+a {
+	color: white !important;
+}
+
 #forcast
 {
 	margin-left: auto;
@@ -29,14 +30,32 @@ button:focus {
 	background-color: yellow;
 }
 
-#dest
+#destination {
+	text-align: center;
+	font-size: 3vw;
+	font-weight: bold;
+	width: 50%;
+	margin 0;
+	float: left;
+}
+
+#location
 {
+	text-align: center;
+	font-size: 3vw;
+	font-weight: bold;
+	width: 50%;
+	float: left;
+	margin 0;
+}
+
+#dest {
 	color: #006400 !important;
 }
 
-#dest #dest
-{
-	border-color: #006400;
+.enter {
+	clear: both;
+	margin-top: 50px;
 }
 
 hr
@@ -64,7 +83,7 @@ form
 	margin-top: 2%;
 	background-color: #6ff36e;
 	border: solid white 5px;
-	color: white;
+	color: #006400;
 	font-size: 40px;
 	padding: 10px;
 }

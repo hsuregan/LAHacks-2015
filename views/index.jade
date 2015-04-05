@@ -1,7 +1,8 @@
 doctype html
 html
   head
-    link(rel='stylesheet', type='text/css', href='css/style.css')
+    title Travel Pixie
+    link(rel='stylesheet', type='text/css', href='../../css/style.css')
     link(href='http://fonts.googleapis.com/css?family=Quicksand:300,400,700', rel='stylesheet', type='text/css')
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js', type='text/javascript')
     link(rel='stylesheet', href='http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/flick/jquery-ui.css')
@@ -19,14 +20,14 @@ html
   body
     center
       h1
-        | Travel Info
+        | Travel Pixie
     form#form_demo(action='', method='post', name='form_demo', enctype='multipart/form-data')
       #location
         | Going from
         br
         input#f_elem_city.ff_elem(type='text', value='', name='origin')
       #destination
-        | Goint to 
+        | Going to 
         br
         input#dest.ff_elem(type='text', name='', value='')
     br
@@ -81,7 +82,6 @@ html
     $('.enter').click(function() {
     var from = $('#f_elem_city').val();
     var goingto = $('#dest').val();
-    alert(from + ' ' + goingto);
     document.location.href += from + '/' + goingto;
     });
   script(type='text/javascript').

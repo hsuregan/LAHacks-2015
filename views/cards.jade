@@ -4,17 +4,19 @@ html.no-js(lang='en')
     meta(charset='UTF-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    title Loading Effects for Grid Items | Demo 1
+    title Travel Pixie
     meta(name='description', content='Loading Effects for Grid Items with CSS Animations')
     meta(name='keywords', content='css animation, loading effect, google plus, grid items, masonry')
     meta(name='author', content='Codrops')
     link(rel='shortcut icon', href='../favicon.ico')
     link(rel='stylesheet', type='text/css', href='../../css/default.css')
     link(rel='stylesheet', type='text/css', href='../../css/component.css')
+    link(rel='stylesheet', type='text/css', href='../../css/screen_48.css')
     script(src='../../js/modernizr.custom.js')
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
     script(src='../../js/script.js')
     script(src='../../js/skycons.js')
+    script(src='../../js/joncombe_48.js')
     // geobytes
     script(src='http://gd.geobytes.com/geoif', language='javascript')
     style.
@@ -103,7 +105,7 @@ html.no-js(lang='en')
                 .col-md-8
                   #weather_date6.weather_date
         li
-          #details.tile(style='height: 730px; overflow: scroll')
+          #details.tile(style='height: 730px; overflow-y: hidden')
             .tile_title Details
             center
               #website.tile_title(style='font-size: 20px !important; text-align: center')
@@ -118,18 +120,39 @@ html.no-js(lang='en')
         li
           #Abstract.tile(style='padding: 10px; font-size: 15px !important;')
             .tile_title Abstract
+        li
+          #clockdigital
+            img#digitalhour(src='../../images/digitalhours.gif', alt='Clocks hours')
+            img#digitalminute(src='../../images/digitalminutes.gif', alt='Clocks minutes')
+            img#digitalsecond(src='../../images/digitalseconds.gif', alt='Clocks seconds')
   script(src='../../js/masonry.pkgd.min.js')
   script(src='../../js/imagesloaded.js')
   script(src='../../js/classie.js')
   script(src='../../js/AnimOnScroll.js')
+  sript.
+    var bScriptLoaded = false;
+    var bDOMLoaded = false;
+    var bClocksInitialised = false;
+    function ClockInit() {
+      if ((bClocksInitialised != true) && (bDOMLoaded == true) && (bScriptLoaded == true)) {
+        bClocksInitialised = true;
+        oClockAnalog.fInit();
+        oClockDigital.fInit();
+      }
+    }
+  script(src='../../js/css-clocks_1.js')
   script.
     new AnimOnScroll( document.getElementById( 'grid' ), {
       minDuration : 0.4,
       maxDuration : 0.7,
       viewportFactor : 0.2
     });
+    
+
   script(type='text/javascript').
     $(document).ready( function(){
+      bDOMLoaded = true;
+      ClockInit();
       var from = !{JSON.stringify(from)};
       var to = !{JSON.stringify(to)};
       var dest = to;
@@ -146,7 +169,7 @@ html.no-js(lang='en')
         return date;
       }
       function b(latitude, longitude){
-        var apiKey = '706c386921e262c76e7f8801b02e8c85';
+        //var apiKey = '706c386921e262c76e7f8801b02e8c85';
         var url = 'https://api.forecast.io/forecast/';
         var lati = latitude;
         var longi = longitude;
@@ -312,7 +335,8 @@ html.no-js(lang='en')
           }
           
           if(dest.abstract) {
-            $('#Abstract').append(dest.abstract);
+            citycompress = dest.city.replace(' ', '_');
+            $('#Abstract').append(dest.abstract + " <a color='white' href = 'http://en.wikipedia.org/wiki/" +citycompress+ "'> Read more </a>");
           }
 
           $('#details').css('padding-bottom', '25px');
